@@ -14,15 +14,14 @@ serve(Port) ->
 
 listen_loop(LSock) ->
 	{ok, Sock} = gen_tcp:accept(LSock),
-	{ok, Bin} = do_recv(Sock, []),
-	io:fwrite("~s~n", [Bin]),
+	do_recv(Sock),
 	listen_loop(LSock).	
 
-do_recv(Sock, Bs) ->
+do_recv(Sock) ->
 	case gen_tcp:recv(Sock, 0) of
 		{ok, B} ->
-			do_recv(Sock, lists:append(Bs, binary_to_list(B)));
+			io:fwrite("~s", [binary_to_list(B)]),
+			do_recv(Sock);
 		{error, closed} ->
-			gen_tcp:close(Sock),
-			{ok, Bs}
+			gen_tcp:close(Sock)
 	end.
