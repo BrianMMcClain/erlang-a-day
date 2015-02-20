@@ -1,4 +1,4 @@
-% TCP Echo
+% TCP Listener
 %
 % This module will listen on the given port (default 9999 if no port is given)
 % and echo back to the user what they had entered
