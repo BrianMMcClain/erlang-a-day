@@ -6,17 +6,21 @@
 -module(tcplistener).
 -export([serve/0, serve/1]).
 
+% If no port is specified, default to port 9999
 serve() ->
 	serve(9999).
+% Open socket on defined port and begin listening
 serve(Port) ->
 	{ok, LSock} = gen_tcp:listen(Port, [binary, {packet, 0}, {active, false}]),
 	listen_loop(LSock).
 
+% Start listening for new connections when the client is closed
 listen_loop(LSock) ->
 	{ok, Sock} = gen_tcp:accept(LSock),
 	do_recv(Sock),
 	listen_loop(LSock).	
 
+% Continue to read from the socket until it is closed
 do_recv(Sock) ->
 	case gen_tcp:recv(Sock, 0) of
 		{ok, B} ->
