@@ -1,3 +1,8 @@
+% TCP Echo
+%
+% This module will listen on the given port (default 9999 if no port is given)
+% and echo back to the user what they had entered
+
 -module(tcpecho).
 -export([serve/0, serve/1]).
 
