@@ -8,12 +8,12 @@ serve(Port) ->
 	{ok, Sock} = gen_tcp:accept(LSock),
 	{ok, Bin} = do_recv(Sock, []),
 	ok = gen_tcp:close(Sock),
-	Bin.
+	binary_to_list(Bin).
 
 do_recv(Sock, Bs) ->
 	case gen_tcp:recv(Sock, 0) of
 		{ok, B} ->
-			do_recv(Sock, [Bs, B]);
+			do_recv(Sock, lists:append(Bs, B));
 		{error, closed} ->
 			{ok, Bs}
 	end.
