@@ -16,4 +16,16 @@ Download rebar and generate a new app
  ./rebar compile
  ```
 
- 
+ Add dependencies to rebar.config, in this case, lager
+ ```
+ {deps, [
+  {lager, "2.1.1", {git, "https://github.com/basho/lager.git", "2.1.1"}}
+]}.
+
+{erl_opts, [{parse_transform, lager_transform}]}.
+```
+
+Pull down dependencies
+```
+./rebar get-deps
+```
