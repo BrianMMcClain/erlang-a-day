@@ -10,6 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
+    lager:info("Child process started"),
     rebarapp_sup:start_link().
 
 stop(_State) ->
