@@ -1,0 +1,12 @@
+{application, revprox,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { revprox_app, []}},
+  {env, []}
+ ]}.
